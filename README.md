@@ -16,7 +16,8 @@
 ```html
 <script src="l.js">
 	ljs.load('myLib.js',function(){ /* your callback here */});
-</script>```
+</script>
+```
 
 ### loading some scripts in parrallel others in order
 ```html
@@ -25,7 +26,8 @@
 		.load('myLib.js')
 		.load('myRequiredLib.js','myDependentLib.js',function(){ /* your callback here */})
 	;
-</script>```
+</script>
+```
 second load will be executed in parrallel of first load but myDependentLib.js won't load before myRequireLib.js is laoded
 
 ### using some aliases for simpler loading
@@ -42,7 +44,8 @@ second load will be executed in parrallel of first load but myDependentLib.js wo
 	ljs.load('ui',function(){
 		/* work with both jquery and jquery-ui here */
 	});
-</script>```
+</script>
+```
 	
 ## todo
 - add option for prefetching scripts
