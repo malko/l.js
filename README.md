@@ -13,33 +13,36 @@
 ## examples
 
 ### loading ljs and another libs with one single tag
-	<script src="l.js">
-		ljs.load('myLib.js',function(){ /* your callback here */});
-	</script>
+```html
+<script src="l.js">
+	ljs.load('myLib.js',function(){ /* your callback here */});
+</script>```
 
 ### loading some scripts in parrallel others in order
-	<script src="l.js">
-		ljs
-			.load('myLib.js')
-			.load('myRequiredLib.js','myDependentLib.js',function(){ /* your callback here */})
-		;
-	</script>
+```html
+<script src="l.js">
+	ljs
+		.load('myLib.js')
+		.load('myRequiredLib.js','myDependentLib.js',function(){ /* your callback here */})
+	;
+</script>```
 second load will be executed in parrallel of first load but myDependentLib.js won't load before myRequireLib.js is laoded
 
 ### using some aliases for simpler loading
-	<script src="l.js">
-		ljs.aliases = {
-			jQuery:'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
-			ui:[
-				'jQuery'
-				,'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js'
-				,'myUITheme.css'
-			]
-		}
-		ljs.load('ui',function(){
-			/* work with both jquery and jquery-ui here */
-		});
-	</script>
+```html
+<script src="l.js">
+	ljs.aliases = {
+		jQuery:'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
+		ui:[
+			'jQuery'
+			,'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js'
+			,'myUITheme.css'
+		]
+	}
+	ljs.load('ui',function(){
+		/* work with both jquery and jquery-ui here */
+	});
+</script>```
 	
 ## todo
 - add option for prefetching scripts
