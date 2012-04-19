@@ -9,6 +9,7 @@
 - on demand loading
 - only one script tag required
 - clear syntax
+- successive load of same file will load it once but execute all callbacks associated
 
 ## examples
 
