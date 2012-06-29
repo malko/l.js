@@ -3,7 +3,7 @@
 ## features
 - parrallel script / css loading
 - callback after script loading (css support callback too but are excuted imediately)
-- tiny only 1.8ko uglifyed (at least for now)
+- tiny only 1.8ko uglifyed, 0.8ko gziped (at least for now)
 - may load in order to preserve dependencies
 - support aliases for simpler calling
 - on demand loading
