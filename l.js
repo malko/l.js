@@ -106,6 +106,7 @@
 				for(var i in aliases ){
 					this.aliases[i]= isA(aliases[i]) ? aliases[i].slice(0) : aliases[i];
 				}
+				return this;
 			}
 		}
 	;

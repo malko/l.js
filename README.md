@@ -10,6 +10,7 @@
 - only one script tag required
 - clear syntax
 - successive load of same file will load it once but execute all callbacks associated
+- check already inserted tags at load time
 
 ## examples
 
@@ -33,18 +34,20 @@ second load will be executed in parrallel of first load but myDependentLib.js wo
 
 ### using some aliases for simpler loading
 ```html
-<script src="l.js">
-	ljs.aliases = {
-		jQuery:'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js'
-		ui:[
-			'jQuery'
-			,'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js'
-			,'myUITheme.css'
-		]
-	}
-	ljs.load('ui',function(){
-		/* work with both jquery and jquery-ui here */
-	});
+<script src="l.js?checkLoaded"> // <- adding checkLoaded to the url will check already inserted script/link tags
+	ljs
+		.addAliases({
+			jQuery:'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js#jqueryId' // <- script tag will have attribute id=jqueryId
+			ui:[
+				'jQuery'
+				,'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js'
+				,'myUITheme.css'
+			]
+		})
+		.load('ui',function(){
+			/* work with both jquery and jquery-ui here */
+		})
+	;
 </script>
 ```
 	
