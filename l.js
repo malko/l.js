@@ -22,7 +22,7 @@
 		, match = 'match'
 		, length = 'length'
 		, readyState = 'readyState'
-		, onreadystatechange = 'on'+readyState+'change'
+		, onreadystatechange = 'onreadystatechange'
 		//-- get the current script tag for further evaluation of it's eventual content
 		,scripts = D[getElementsByTagName]("script")
 		,script  = scripts[ scripts[length] - 1 ].innerHTML[replace](/^\s+|\s+$/g,'')
