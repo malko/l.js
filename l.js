@@ -7,6 +7,7 @@
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
+*            - 2013-01-25 - add parrallel loading inside single load call
 *            - 2012-06-29 - some minifier optimisations
 *            - 2012-04-20 - now sharp part of url will be used as tag id
 *                         - add options for checking already loaded scripts at load time
@@ -57,6 +58,13 @@
 				isA(args) || (args=[args]);
 				cb && args.push(cb);
 				return this.load.apply(this,args);
+			}
+			if( isA(url) ){ // parallelized request
+				for( var l=url.length; l--;){
+					this.load(url[l]);
+				}
+				cb && url.push(cb); // relaunch the dependancie queue
+				return this.load.apply(this,url);
 			}
 			if( url[match](/\.css\b/) ){
 				return this.loadcss(url,cb);
