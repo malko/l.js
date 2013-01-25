@@ -3,14 +3,14 @@
 ## features
 - parrallel script / css loading
 - callback after script loading (css support callback too but are excuted imediately)
-- tiny only 1.8ko uglifyed, 0.8ko gziped (at least for now)
+- tiny only 1.9ko uglifyed, 0.9ko gziped (at least for now)
 - may load in order to preserve dependencies
 - support aliases for simpler calling
 - on demand loading
 - only one script tag required
 - clear syntax
 - successive load of same file will load it once but execute all callbacks associated
-- check already inserted tags at load time
+- can check already inserted tags at load time
 
 ## examples
 
