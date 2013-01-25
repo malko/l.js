@@ -32,6 +32,15 @@
 ```
 second load will be executed in parrallel of first load but myDependentLib.js won't load before myRequireLib.js is laoded
 
+```html
+<script src="l.js">
+	ljs.load(['myLib.js','myRequiredLib.js'],'myDependentLib.js',function(){ /* your callback here */})
+	;
+</script>
+```
+this will load myLib.js and myRequiredLib.js in parrallel and wait for them before loading myDependentLib.js
+
+
 ### using some aliases for simpler loading
 ```html
 <script src="l.js?checkLoaded"> // <- adding checkLoaded to the url will check already inserted script/link tags
@@ -50,9 +59,6 @@ second load will be executed in parrallel of first load but myDependentLib.js wo
 	;
 </script>
 ```
-	
-## todo
-- add option for prefetching scripts
 	
 this piece of code is dual licenced under MIT / GPL
 Hope this help, code review, suggestions, bug reports are welcome and appreciated.
