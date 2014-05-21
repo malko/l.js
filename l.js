@@ -121,7 +121,7 @@
 	if( checkLoaded ){
 		var i,l,links;
 		for(i=0,l=scripts[length];i<l;i++){
-			loaded[scripts[i].src]=true;
+			loaded[scripts[i].getAttribute('src')]=true;
 		}
 		links = D[getElementsByTagName]('link');
 		for(i=0,l=links[length];i<l;i++){
