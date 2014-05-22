@@ -125,7 +125,7 @@
 		}
 		links = D[getElementsByTagName]('link');
 		for(i=0,l=links[length];i<l;i++){
-			(links[i].rel==="stylesheet" || links[i].type==='text/css') && (loaded[links[i].href]=true);
+			(links[i].rel==="stylesheet" || links[i].type==='text/css') && (loaded[links[i].getAttribute('href')]=true);
 		}
 	}
 	//export ljs
