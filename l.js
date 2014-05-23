@@ -135,10 +135,12 @@
 	if( checkLoaded ){
 		var i,l,links;
 		for(i=0,l=scripts[length];i<l;i++){
-      var url = scripts[i].getAttribute('src');
-      var id  =(url[match]('#')?url[replace](/^[^#]+#/,''):null);
-      id && (url = url[replace](/#.*$/,''));
-      loaded[url]=true;
+	      		var url = scripts[i].getAttribute('src');
+	      		if(url){
+      				var id  =(url[match]('#')?url[replace](/^[^#]+#/,''):null);
+      				id && (url = url[replace](/#.*$/,''));
+      				loaded[url]=true;
+	      		}
 		}
 		links = D[getElementsByTagName]('link');
 		for(i=0,l=links[length];i<l;i++){
