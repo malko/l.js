@@ -7,6 +7,9 @@
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
+*            - 2014-05-21 - add cdn fallback support with hashbang url
+*            - 2014-05-22 - add support for relative paths for stylesheets in checkLoaded
+*            - 2014-05-21 - add support for relative paths for scripts in checkLoaded
 *            - 2013-01-25 - add parrallel loading inside single load call
 *            - 2012-06-29 - some minifier optimisations
 *            - 2012-04-20 - now sharp part of url will be used as tag id
@@ -24,6 +27,7 @@
 		, length = 'length'
 		, readyState = 'readyState'
 		, onreadystatechange = 'onreadystatechange'
+		, scriptRegex = /^([^#]*)(#=([^#]*))?(#(.*))?/
 		//-- get the current script tag for further evaluation of it's eventual content
 		,scripts = D[getElementsByTagName]("script")
 		,script  = scripts[ scripts[length] - 1 ].innerHTML[replace](/^\s+|\s+$/g,'')
@@ -34,7 +38,7 @@
 	var checkLoaded = scripts[ scripts[length] - 1 ].src[match](/checkLoaded/)?true:false
 		//-- keep trace of header as we will make multiple access to it
 		,header  = D[getElementsByTagName]("head")[0] || D.documentElement
-		,appendElmt = function(type,attrs,cb){
+	    ,appendElmt = function(type,attrs,cb){
 			var e = D.createElement(type), i;
 			if( cb ){ //-- this is not intended to be used for link
 				if(e[readyState]){
@@ -75,8 +79,8 @@
 		,loader  = {
 			aliases:{}
 			,loadjs: function(url,cb){
-				var id  =(url[match]('#')?url[replace](/^[^#]+#/,''):null);
-				id && (url = url[replace](/#.*$/,''));
+				var matches = url[match](scriptRegex);
+				var url = matches[1], id = matches[5], fallbackURL = matches[3];
 				if( loaded[url] === true ){ // already loaded exec cb if any
 					cb && cb();
 					return this;
@@ -88,7 +92,9 @@
 				}
 				// first time we ask this script
 				loaded[url] = function(cb){ return function(){loaded[url]=true; cb && cb();}}(cb);
-				appendElmt('script',{type:'text/javascript',src:url,id:id},function(){ loaded[url]() });
+				appendElmt('script',{type:'text/javascript',src:url,id:id,onerror:function(){
+          				if(fallbackURL) ljs.load(fallbackURL, function(){ loaded[url]()}));
+		        	}},function(){ loaded[url]() });
 				return this;
 			}
 			,loadcss: function(url,cb){
@@ -121,11 +127,12 @@
 	if( checkLoaded ){
 		var i,l,links;
 		for(i=0,l=scripts[length];i<l;i++){
-			loaded[scripts[i].getAttribute('src')]=true;
+      		var url = scripts[i].getAttribute('src').replace(scriptRegex,'$1');
+      		loaded[url]=true;
 		}
 		links = D[getElementsByTagName]('link');
 		for(i=0,l=links[length];i<l;i++){
-			(links[i].rel==="stylesheet" || links[i].type==='text/css') && (loaded[links[i].href]=true);
+			(links[i].rel==="stylesheet" || links[i].type==='text/css') && (loaded[links[i].getAttribute('href')]=true);
 		}
 	}
 	//export ljs
