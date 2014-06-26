@@ -7,6 +7,7 @@
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
+*	     - 2014-06-26 - bugfix in css loaded check when hashbang is used
 *            - 2014-05-25 - fallback support rewrite + null id bug correction + minification work
 *            - 2014-05-21 - add cdn fallback support with hashbang url
 *            - 2014-05-22 - add support for relative paths for stylesheets in checkLoaded
@@ -138,7 +139,7 @@
 			}
 			links = D[getElementsByTagName]('link');
 			for(i=0,l=links[length];i<l;i++){
-				(links[i].rel==='stylesheet' || links[i].type==='text/css') && (loaded[links[i].getAttribute('href')]=true);
+				(links[i].rel==='stylesheet' || links[i].type==='text/css') && (loaded[links[i].getAttribute('href').replace(/#.*$/,'')]=true);
 			}
 		}
 		//export ljs
