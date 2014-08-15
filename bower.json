@@ -14,6 +14,10 @@
     "async"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:malko/l.js.git"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
