@@ -146,5 +146,6 @@
 		window.ljs = loader;
 		// eval inside tag code if any
 	}
-	script && gEval(script);
+	// eval script tag content if needed
+	scriptTag.src && script && gEval(script);
 })(window);
