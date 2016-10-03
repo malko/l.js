@@ -34,6 +34,25 @@
 	;
 	//avoid multiple inclusion to override current loader but allow tag content evaluation
 	if( ! window.ljs ){
+		appendElmt = function(type,attrs,cb){
+			var e = D.createElement(type), i;
+			if( cb ){ //-- this is not intended to be used for link
+				if(e[readyState]){
+					e[onreadystatechange] = function(){
+						if (e[readyState] === "loaded" || e[readyState] === "complete"){
+							e[onreadystatechange] = null;
+							cb();
+						}
+					};
+				}else{
+					e.onload = cb;
+				}
+			}
+			for( i in attrs ){ attrs[i] && (e[i]=attrs[i]); }
+			header.appendChild(e);
+			// return e; // unused at this time so drop it
+		}
+
 		var checkLoaded = scriptTag.src.match(/checkLoaded/)?1:0
 			//-- keep trace of header as we will make multiple access to it
 			,header  = D[getElementsByTagName]("head")[0] || D.documentElement
@@ -41,24 +60,6 @@
 				var parts={}; // u => url, i => id, f = fallback
 				parts.u = url.replace(/#(=)?([^#]*)?/g,function(m,a,b){ parts[a?'f':'i'] = b; return '';});
 				return parts;
-			}
-			,appendElmt = function(type,attrs,cb){
-				var e = D.createElement(type), i;
-				if( cb ){ //-- this is not intended to be used for link
-					if(e[readyState]){
-						e[onreadystatechange] = function(){
-							if (e[readyState] === "loaded" || e[readyState] === "complete"){
-								e[onreadystatechange] = null;
-								cb();
-							}
-						};
-					}else{
-						e.onload = cb;
-					}
-				}
-				for( i in attrs ){ attrs[i] && (e[i]=attrs[i]); }
-				header.appendChild(e);
-				// return e; // unused at this time so drop it
 			}
 			,load = function(url,cb){
 				if( this.aliases && this.aliases[url] ){
