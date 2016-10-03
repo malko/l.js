@@ -7,7 +7,8 @@
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
-*	     - 2014-06-26 - bugfix in css loaded check when hashbang is used
+*            - 2016-08-22 - remove global eval and fix issue #13
+*            - 2014-06-26 - bugfix in css loaded check when hashbang is used
 *            - 2014-05-25 - fallback support rewrite + null id bug correction + minification work
 *            - 2014-05-21 - add cdn fallback support with hashbang url
 *            - 2014-05-22 - add support for relative paths for stylesheets in checkLoaded
@@ -19,9 +20,7 @@
 *            - 2012-04-19 - add addAliases method
 * @note coding style is implied by the target usage of this script not my habbits
 */
-	/** gEval credits goes to my javascript idol John Resig, this is a simplified jQuery.globalEval */
-	var gEval = function(js){ ( window.execScript || function(js){ window[ "eval" ].call(window,js);} )(js); }
-		, isA =  function(a,b){ return a instanceof (b || Array);}
+	var isA =  function(a,b){ return a instanceof (b || Array);}
 		//-- some minifier optimisation
 		, D = document
 		, getElementsByTagName = 'getElementsByTagName'
@@ -146,5 +145,6 @@
 		window.ljs = loader;
 		// eval inside tag code if any
 	}
-	script && gEval(script);
+	// eval script tag content if needed
+	scriptTag.src && script && appendElmt('script', {innerHTML: script});
 })(window);

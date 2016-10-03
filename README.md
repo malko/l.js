@@ -1,9 +1,9 @@
 # l.js is another simple/tiny javascript/css loader
 
 ## features
-- parrallel script / css loading
-- callback after script loading (css support callback too but are excuted imediately)
-- tiny only 2ko uglifyed, 1ko gziped (at least for latest revision)
+- parallel script / css loading
+- callback after script loading (css support callback too but are executed imediately)
+- tiny only 2.1ko uglifyed, less than 1ko gziped (at least for latest revision)
 - may load in order to preserve dependencies
 - support aliases for simpler calling
 - on demand loading
@@ -22,7 +22,7 @@
 </script>
 ```
 
-### loading some scripts in parrallel others in order
+### loading some scripts in parallel others in order
 ```html
 <script src="l.js">
 	ljs
@@ -31,7 +31,7 @@
 	;
 </script>
 ```
-second load will be executed in parrallel of first load but myDependentLib.js won't load before myRequireLib.js is laoded
+second load will be executed in parallel of first load but myDependentLib.js won't load before myRequireLib.js is loaded
 
 ```html
 <script src="l.js">
@@ -72,5 +72,5 @@ You can define this fallback url parameter like you define ids. The difference i
 	});
 </script>
 ```
-this piece of code is dual licenced under MIT / GPL
+this piece of code is dual licensed under MIT / GPL
 Hope this help, code review, suggestions, bug reports are welcome and appreciated.

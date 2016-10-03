@@ -1,0 +1,28 @@
+{
+  "name": "l.js",
+  "main": "l.js",
+  "version": "0.1.1",
+  "homepage": "http://malko.github.io/l.js/",
+  "authors": [
+    "malko <jgotti@jgotti.org>",
+    "ivanrey <ivan.rey@inpltda.com>"
+  ],
+  "description": "l.js is a 1kb simple/tiny javascript/css loader",
+  "keywords": [
+    "loader",
+    "tiny",
+    "async"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com:malko/l.js.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
