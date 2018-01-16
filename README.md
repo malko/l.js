@@ -21,6 +21,12 @@
 	ljs.load('myLib.js',function(){ /* your callback here */});
 </script>
 ```
+or using rawgit CDN:
+```html
+<script src="https://cdn.rawgit.com/malko/l.js/v0.1.1/l.min.js">
+	ljs.load('myLib.js',function(){ /* your callback here */});
+</script>
+```
 
 ### loading some scripts in parallel others in order
 ```html
