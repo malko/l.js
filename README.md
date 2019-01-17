@@ -1,17 +1,19 @@
 # l.js is another simple/tiny javascript/css loader
 
 ## features
+- compatible with all ECMASCRIPT 5.1 browsers (Warning for old users this is a breaking change on supporting long time deprecated browsers)
 - parallel script / css loading
 - callback after script loading (css support callback too but are executed imediately)
-- tiny only 2.1ko uglifyed, less than 1ko gziped (at least for latest revision)
+- tiny only 2ko uglifyed, less than 1.1ko gziped (at least for latest revision)
 - may load in order to preserve dependencies
 - support aliases for simpler calling
 - on demand loading
 - only one script tag required
-- clear syntax
+- clear syntax (to use not in the source code :) )
 - successive load of same file will load it once but execute all callbacks associated
 - can dumbly check already inserted tags at load time
 - may use a fallback url on error (only for js files and with error events compatible browsers)
+- may register error handlers (only for js files and with error events compatible browsers)
 
 ## examples
 
@@ -23,7 +25,7 @@
 ```
 or using rawgit CDN:
 ```html
-<script src="https://cdn.rawgit.com/malko/l.js/v0.1.1/l.min.js">
+<script src="https://cdn.rawgit.com/malko/l.js/v0.2.0/l.min.js">
 	ljs.load('myLib.js',function(){ /* your callback here */});
 </script>
 ```
@@ -53,7 +55,7 @@ this will load myLib.js and myRequiredLib.js in parrallel and wait for them befo
 	ljs
 		.addAliases({
 			jQuery:'http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js#jqueryId' // <- script tag will have attribute id=jqueryId
-			ui:[
+			,ui:[
 				'jQuery'
 				,'https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js'
 				,'myUITheme.css'
@@ -78,5 +80,18 @@ You can define this fallback url parameter like you define ids. The difference i
 	});
 </script>
 ```
+
+### register an error handler
+```html
+<script src="l.js">
+	ljs
+		.load('missingFile.js',function(){ /* your callback here */})
+		.onError(function(url) {
+			console.log('error loading', url); // <- will print "error loading missingFile.js"
+		})
+	;
+</script>
+```
+
 this piece of code is dual licensed under MIT / GPL
 Hope this help, code review, suggestions, bug reports are welcome and appreciated.
