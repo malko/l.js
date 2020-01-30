@@ -1,4 +1,6 @@
 # l.js is another simple/tiny javascript/css loader
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmalko%2Fl.js.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmalko%2Fl.js?ref=badge_shield)
+
 
 ## features
 - compatible with all ECMASCRIPT 5.1 browsers (Warning for old users this is a breaking change on supporting long time deprecated browsers)
@@ -105,3 +107,7 @@ to load javascript modules you have to add the suffix `.module` to the url, this
 
 this piece of code is dual licensed under MIT / GPL
 Hope this help, code review, suggestions, bug reports are welcome and appreciated.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmalko%2Fl.js.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmalko%2Fl.js?ref=badge_large)
