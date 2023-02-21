@@ -29,6 +29,7 @@
 		, readyState = 'readyState'
 		, onreadystatechange = 'onreadystatechange'
 		, typeJS = 'text/javascript'
+		, typeModule = 'module'
 		, scriptStr = 'script'
 		, header  = D[getElementsByTagName]("head")[0] || D.documentElement
 		, aliases = {}
@@ -61,7 +62,7 @@
 			//-- keep trace of header as we will make multiple access to it
 			,urlParse = function(url){
 				var parts={}; // u => url, i => id, f = fallback
-				parts.u = url.replace(/#(=)?([^#]*)?/g,function(m,a,b){ parts[a?'f':'i'] = b; return '';});
+				parts.u = url.replace(/#(=)?([^#]*)?|(\.module)/g,function(m,a,b,c){parts[a?'f':'i'] = b;parts['m'] = !!c;return '';});
 				return parts;
 			}
 			,load = function(loader, url,cb){
@@ -90,6 +91,7 @@
 				,loadjs: function(url,cb){
 					var parts = urlParse(url);
 					var onError = function(url) {for(var i=0, l=errorHandlers.length;i<l;i++){errorHandlers[i](url)}};
+					var type = parts.m ? typeModule : typeJS;
 					url = parts.u;
 					if( loaded[url] === true ){ // already loaded exec cb if any
 						cb && cb();
@@ -104,11 +106,11 @@
 					loaded[url] = (function(cb){ return function(){loaded[url]=true; cb && cb();};})(cb);
 					cb = function(){ loaded[url](); };
 
-					appendElmt(scriptStr,{type:typeJS,src:url,id:parts.i,onerror:function(error){
+					appendElmt(scriptStr,{type:type,src:url,id:parts.i,onerror:function(error){
 						onError(url);
 						var c = error.currentTarget;
 						c.parentNode.removeChild(c);
-						appendElmt(scriptStr,{type:typeJS,src:parts.f,id:parts.i, onerror:function(){onError(parts.f)}},cb);
+						appendElmt(scriptStr,{type:type,src:parts.f,id:parts.i, onerror:function(){onError(parts.f)}},cb);
 					}},cb);
 					return loader;
 				}
