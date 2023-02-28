@@ -16,6 +16,7 @@
 - can dumbly check already inserted tags at load time
 - may use a fallback url on error (only for js files and with error events compatible browsers)
 - may register error handlers (only for js files and with error events compatible browsers)
+- can load javascripts modules
 
 ## examples
 
@@ -92,6 +93,15 @@ You can define this fallback url parameter like you define ids. The difference i
 			console.log('error loading', url); // <- will print "error loading missingFile.js"
 		})
 	;
+</script>
+```
+
+### load a js module
+As a default l.js load js scripts with their type attribute set to `text/javascript`. To set type to `module` instead, simply prefix the url with `module:`
+
+```html
+<script src="l.js">
+    ljs.load('module:myModuleLib.js',function(){ /* your callback here */});
 </script>
 ```
 

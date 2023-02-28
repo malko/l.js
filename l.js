@@ -3,10 +3,12 @@
 /*
 * script for js/css parallel loading with dependancies management
 * @author Jonathan Gotti < jgotti at jgotti dot net >
+* @contributors ivanrey, AlexGal0
 * @licence dual licence mit / gpl
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
+*            - 2023-02-28 - add support for module type thanks to PR#21 by AlexGal0
 *            - 2019-01-17 - add support for error handlers + bugFix on multiple inclusion of filled script tag fix issues #15 and #17
 *            - 2016-08-22 - remove global eval and fix issue #13
 *            - 2014-06-26 - bugfix in css loaded check when hashbang is used
@@ -28,7 +30,6 @@
 		, length = 'length'
 		, readyState = 'readyState'
 		, onreadystatechange = 'onreadystatechange'
-		, typeJS = 'text/javascript'
 		, scriptStr = 'script'
 		, header  = D[getElementsByTagName]("head")[0] || D.documentElement
 		, aliases = {}
@@ -60,8 +61,8 @@
 		var checkLoaded = scriptTag.src.match(/checkLoaded/)?1:0
 			//-- keep trace of header as we will make multiple access to it
 			,urlParse = function(url){
-				var parts={}; // u => url, i => id, f = fallback
-				parts.u = url.replace(/#(=)?([^#]*)?/g,function(m,a,b){ parts[a?'f':'i'] = b; return '';});
+				var parts={}; // u => url, i => id, f => fallback, m => is a module
+				parts.u = url.replace(/(^module:)|#(=)?([^#]*)?/g,function(_,m,f,i){parts[m?'m':f?'f':'i']=!!m||i;return '';});
 				return parts;
 			}
 			,load = function(loader, url,cb){
@@ -90,6 +91,7 @@
 				,loadjs: function(url,cb){
 					var parts = urlParse(url);
 					var onError = function(url) {for(var i=0, l=errorHandlers.length;i<l;i++){errorHandlers[i](url)}};
+					var type = parts.m ? 'module' : 'text/javascript';
 					url = parts.u;
 					if( loaded[url] === true ){ // already loaded exec cb if any
 						cb && cb();
@@ -104,11 +106,11 @@
 					loaded[url] = (function(cb){ return function(){loaded[url]=true; cb && cb();};})(cb);
 					cb = function(){ loaded[url](); };
 
-					appendElmt(scriptStr,{type:typeJS,src:url,id:parts.i,onerror:function(error){
+					appendElmt(scriptStr,{type:type,src:url,id:parts.i,onerror:function(error){
 						onError(url);
 						var c = error.currentTarget;
 						c.parentNode.removeChild(c);
-						appendElmt(scriptStr,{type:typeJS,src:parts.f,id:parts.i, onerror:function(){onError(parts.f)}},cb);
+						appendElmt(scriptStr,{type:type,src:parts.f,id:parts.i, onerror:function(){onError(parts.f)}},cb);
 					}},cb);
 					return loader;
 				}
