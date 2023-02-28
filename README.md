@@ -26,9 +26,9 @@
 	ljs.load('myLib.js',function(){ /* your callback here */});
 </script>
 ```
-or using rawgit CDN:
+or using jsdeliver CDN:
 ```html
-<script src="https://cdn.rawgit.com/malko/l.js/v0.2.0/l.min.js">
+<script src="https://cdn.jsdelivr.net/gh/malko/l.js@latest/l.min.js">
 	ljs.load('myLib.js',function(){ /* your callback here */});
 </script>
 ```
