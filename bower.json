@@ -1,11 +1,12 @@
 {
   "name": "l.js",
   "main": "l.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "homepage": "http://malko.github.io/l.js/",
   "authors": [
     "malko <jgotti@jgotti.org>",
-    "ivanrey <ivan.rey@inpltda.com>"
+    "ivanrey <ivan.rey@inpltda.com>",
+    "AlexGal0 <https://github.com/AlexGal0/l.js.git>"
   ],
   "description": "l.js is a 1kb simple/tiny javascript/css loader",
   "keywords": [
