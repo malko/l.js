@@ -1,5 +1,5 @@
 {
-  "name": "l.js-loader",
+  "name": "@malko/l.js",
   "version": "0.2.2",
   "description": "another simple/tiny javascript/css loader",
   "files": [

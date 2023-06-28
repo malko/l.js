@@ -34,7 +34,7 @@ or using jsdeliver CDN:
 ```
 
 > If you're looking for the npm package, you should search for l.js-loader
-> ```npm install l.js-loader```
+> ```npm install @malko/l.js```
 
 ### loading some scripts in parallel others in order
 ```html
