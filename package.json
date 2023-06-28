@@ -1,0 +1,18 @@
+{
+  "name": "l.js",
+  "version": "0.2.1",
+  "description": "another simple/tiny javascript/css loader",
+  "files": [
+    "l.min.js"
+  ],
+  "main": "l.min.js",
+  "scripts": {
+    "build": "echo \"//https://github.com/malko/l.js v$npm_package_version MIT license ©Jonathan Gotti\" > l.min.js && uglifyjs l.js -m -c >> l.min.js && cat l.min.js | gzip > l.min.js.gz && ls -lh"
+  },
+  "keywords": [],
+  "author": "Jonathan Gotti <jgotti at jgotti dot org>",
+  "license": "MIT",
+  "devDependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
