@@ -1,6 +1,6 @@
 {
-  "name": "l.js",
-  "version": "0.2.1",
+  "name": "l.js-loader",
+  "version": "0.2.2",
   "description": "another simple/tiny javascript/css loader",
   "files": [
     "l.min.js"
@@ -9,7 +9,7 @@
   "scripts": {
     "build": "echo \"//https://github.com/malko/l.js v$npm_package_version MIT license ©Jonathan Gotti\" > l.min.js && uglifyjs l.js -m -c >> l.min.js && cat l.min.js | gzip > l.min.js.gz && ls -lh"
   },
-  "keywords": [],
+  "keywords": ["loader", "script", "css", "js", "load", "async", "dynamic import", "import", "require"],
   "author": "Jonathan Gotti <jgotti at jgotti dot org>",
   "license": "MIT",
   "devDependencies": {

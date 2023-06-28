@@ -33,6 +33,9 @@ or using jsdeliver CDN:
 </script>
 ```
 
+> If you're looking for the npm package, you should search for l.js-loader
+> ```npm install l.js-loader```
+
 ### loading some scripts in parallel others in order
 ```html
 <script src="l.js">
