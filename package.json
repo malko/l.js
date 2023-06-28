@@ -11,6 +11,10 @@
   },
   "keywords": ["loader", "script", "css", "js", "load", "async", "dynamic import", "import", "require"],
   "author": "Jonathan Gotti <jgotti at jgotti dot org>",
+  "contributors": [
+    "malko <jgotti at jgotti dot org>",
+    "ivanrey <ivan.rey@inpltda.com>"
+  ],
   "license": "MIT",
   "devDependencies": {
     "uglify-js": "^3.17.4"
