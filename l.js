@@ -8,6 +8,7 @@
 * @since 2012-04-12
 * @todo add prefetching using text/cache for js files
 * @changelog
+*            - 2026-02-24 - add support nonce thanks to PR#24 by IvanRey
 *            - 2023-02-28 - add support for module type thanks to PR#21 by AlexGal0
 *            - 2019-01-17 - add support for error handlers + bugFix on multiple inclusion of filled script tag fix issues #15 and #17
 *            - 2016-08-22 - remove global eval and fix issue #13
@@ -31,6 +32,7 @@
 		, readyState = 'readyState'
 		, onreadystatechange = 'onreadystatechange'
 		, scriptStr = 'script'
+		, getAttribute = 'getAttribute'
 		, header  = D[getElementsByTagName]("head")[0] || D.documentElement
 		, aliases = {}
 		//-- get the current script tag for further evaluation of it's eventual content
@@ -38,7 +40,7 @@
 		, scriptTag = scripts[scripts[length]-1]
 		, script  = scriptTag.innerHTML.replace(/^\s+|\s+$/g,'')
 		, appendElmt = function(type,attrs,cb){
-			var e = D.createElement(type), i, nonce = scriptTag && (scriptTag.nonce || (scriptTag.getAttribute && scriptTag.getAttribute('nonce')));
+			var e = D.createElement(type), i, nonce = scriptTag && (scriptTag.nonce || (scriptTag[getAttribute] && scriptTag[getAttribute]('nonce')));
 			nonce && e.setAttribute('nonce', nonce);
 			if( cb ){ //-- this is not intended to be used for link
 				if( e[readyState] ){
@@ -147,11 +149,11 @@
 		if( checkLoaded ){
 			var i,l,links,url;
 			for(i=0,l=scripts[length];i<l;i++){
-				(url = scripts[i].getAttribute('src')) && (loaded[url.replace(/#.*$/,'')] = true);
+				(url = scripts[i][getAttribute]('src')) && (loaded[url.replace(/#.*$/,'')] = true);
 			}
 			links = D[getElementsByTagName]('link');
 			for(i=0,l=links[length];i<l;i++){
-				(links[i].rel==='stylesheet' || links[i].type==='text/css') && (loaded[links[i].getAttribute('href').replace(/#.*$/,'')]=true);
+				(links[i].rel==='stylesheet' || links[i].type==='text/css') && (loaded[links[i][getAttribute]('href').replace(/#.*$/,'')]=true);
 			}
 		}
 		//export ljs
