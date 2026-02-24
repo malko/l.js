@@ -108,6 +108,16 @@ As a default l.js load js scripts with their type attribute set to `text/javascr
 </script>
 ```
 
+### Automatic nonce support
+If the script tag used to load l.js has a nonce attribute, l.js will automatically add this nonce to all script tags it creates. This is useful when using Content Security Policy (CSP) to allow inline scripts, as it allows the dynamically created script tags to be executed without violating the CSP.
+```html
+<script src="l.js" nonce="randomNonceValue">
+		ljs.load('myLib.js',function(){ /* your callback here */});
+</script>
+```
+will result in the script tag for myLib.js having the same nonce attribute as the l.js script tag, allowing it to be executed under a CSP that allows scripts with that nonce. This works for both scripts and stylesheets loaded by l.js, as the nonce will be added to all tags created by l.js.
+
+
 this piece of code is dual licensed under MIT / GPL
 Hope this help, code review, suggestions, bug reports are welcome and appreciated.
 

@@ -1,6 +1,6 @@
 {
   "name": "@malko/l.js",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "another simple/tiny javascript/css loader",
   "files": [
     "l.min.js"
